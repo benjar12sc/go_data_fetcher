@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  mongo:
+    image: mongo:7
+    container_name: nrc_mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: superPassword123
+    volumes:
+      - mongo_data:/data/db
+  api:
+    build: .
+    container_name: nrc_api
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - MONGO_URI=mongodb://root:superPassword123@mongo:27017
+      - MONGO_DB=nrc
+    depends_on:
+      - mongo
+volumes:
+  mongo_data:
