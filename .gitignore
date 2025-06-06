@@ -1,7 +1,7 @@
 *.xlsx
 *.csv
 # Go build artifacts
-bin/
+/target/
 *.exe
 *.test
 *.out
